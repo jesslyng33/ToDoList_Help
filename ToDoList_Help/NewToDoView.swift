@@ -17,6 +17,8 @@ struct NewToDoView: View {
     //Add a State property called isImportant that will hold a Boolean
     @State var title: String
     @State var isImportant : Bool
+    @Binding var toDoItems: [ToDoItem]
+    @Binding var showNewTask : Bool
     
     //Bind the ToDoItems array here
         //Delete the ToDoItems array binding in iteration 2
@@ -46,23 +48,27 @@ struct NewToDoView: View {
             
             //Add Button here, delete any code in the action and with the text "Add"
             Button(action: {
-                
+                self.addTask(title: self.title, isImportant: self.isImportant)
+                self.showNewTask = false
             }) {
                 Text("Add")
             }
             .buttonStyle(.borderedProminent)
             .cornerRadius(15)
-
-            //Add a padding modifier
         }
     }
     //Add the private function addTask here
         //In Iteration 2, update the function to save input to Core Data
+    private func addTask(title: String, isImportant: Bool = false) {
+            
+            let task = ToDoItem(title: title, isImportant: isImportant)
+            toDoItems.append(task)
+    }
 }
 
 struct NewToDoView_Previews: PreviewProvider {
     static var previews: some View {
-        NewToDoView(title: "", isImportant: false)
+        NewToDoView(title: "", isImportant: false, toDoItems: .constant([]), showNewTask: .constant(true))
             //Add toDoItems: .constant([]) here (Iteration 1)
             //Add showNewTask: .constant(true) (Iteration 1)
             //Delete toDoItems: .constant([]) (Iteration 2_)

@@ -12,7 +12,8 @@ import Foundation
 //Create the ToDoItem class in this file
 //The initializer goes at the very bottom of the class (before the closing curly bracket)
 
-class ToDoItem {
+class ToDoItem: Identifiable {
+    var id = UUID()
     var title = ""
     var isImportant = false
     
